@@ -52,7 +52,7 @@
 //---------------- Time spent in each state (in ticks) ----------------
 //Change the number of seconds here to alter the timing of each phase
 #define T_S1  (10 * TICKS_PER_SECOND)  //Main green MINIMUM - 10s (requests are ignored for this long)
-#define T_S1_MAX (180 * TICKS_PER_SECOND) //Main green MAXIMUM - 3 min (then main traffic stops holding green)
+#define T_S1_MAX (120 * TICKS_PER_SECOND) //Main green MAXIMUM - 2 min (then main traffic stops holding green)
 #define T_S2  (3  * TICKS_PER_SECOND)  //Main amber
 #define T_S3  (3  * TICKS_PER_SECOND)  //All red clearance
 #define T_S4  (2  * TICKS_PER_SECOND)  //Side red + amber - 2s (TSRGD 2016 Sch.14 para 4(3))
@@ -104,7 +104,7 @@ extern volatile unsigned char ped_request;            //1 = pedestrian button ha
 extern unsigned char sensor_present[NUM_SENSORS];     //1 = vehicle on that sensor (after hysteresis)
 extern unsigned char main_traffic;                    //Vehicle on either main road sensor (live)
 extern unsigned char main_input;                      //State machine input 1 (M)
-extern unsigned char max_green_reached;               //1 = main road has had its 3 minute maximum
+extern unsigned char max_green_reached;               //1 = main road has had its 2 minute maximum
 extern unsigned int  max_green_timer;                 //Ticks left before the main green maximum
 extern unsigned char side_request;                    //REQUEST flag - side road vehicle seen (latched)
 extern unsigned char side_served;                     //SERVED flag - side road had its green this cycle

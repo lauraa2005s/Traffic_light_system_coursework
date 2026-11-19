@@ -9,7 +9,7 @@
  *          the crossing button into the three digital inputs used by the
  *          state machine:
  *            M = main_input   - a vehicle is on either main road sensor (live)
- *                               AND the 3 minute main green maximum has not
+ *                               AND the 2 minute main green maximum has not
  *                               been reached
  *            S = side_input   - side road is waiting AND has not been served yet
  *            P = ped_input    - pedestrians are waiting AND have not been served yet
@@ -97,7 +97,7 @@ void process_sensors(void){
     }
 
     //6. Inputs to the state machine
-    //   M: main traffic only holds the green until the 3 minute maximum is reached
+    //   M: main traffic only holds the green until the 2 minute maximum is reached
     //      (max_green_reached is set by the state machine, reset each time S1 starts)
     //   S, P: waiting AND not already served this cycle
     main_input = (main_traffic && !max_green_reached) ? 1 : 0;   //M

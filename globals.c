@@ -30,7 +30,7 @@ volatile unsigned char ped_request = 0;               //1 = a crossing button ha
 unsigned char sensor_present[NUM_SENSORS] = {0};      //1 = vehicle detected on that sensor
 unsigned char main_traffic = 0;                       //Vehicle on either main road sensor (live)
 unsigned char main_input = 0;                         //Input M: main_traffic AND NOT max_green_reached
-unsigned char max_green_reached = 0;                  //1 = main road has had its 3 minute maximum green
+unsigned char max_green_reached = 0;                  //1 = main road has had its 2 minute maximum green
 unsigned int  max_green_timer = 0;                    //Ticks left before the main green maximum is reached
 unsigned char side_request = 0;                       //REQUEST flag: vehicle has been seen on the side road (latched)
 unsigned char side_served = 0;                        //SERVED flag: side road has had its green this cycle
