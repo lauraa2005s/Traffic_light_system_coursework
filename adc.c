@@ -13,6 +13,9 @@
  *          Same as the lab:
  *            - Port A set to inputs, PCFG = 0b0010 (five analogue inputs)
  *            - ADC clock = fosc/64 (ADCS2:ADCS0 = 1,1,0)
+ *              At fosc = 24MHz: Tad = 64 / 24MHz = 2.67us. The datasheet
+ *              needs Tad of at least 1.6us, so fosc/64 is correct
+ *              (fosc/32 would give 1.33us - too fast)
  *            - Left justified, so the top 8 bits of the result are in ADRESH
  *            - ADC interrupt enabled, ISR clears ADIF and restarts the
  *              conversion (ADCON0bits.GO = 1)

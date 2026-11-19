@@ -34,7 +34,7 @@
 //Definitions
 
 //---------------- Clock and timing ----------------
-#define _XTAL_FREQ        4000000UL  //Crystal frequency assumed to be 4MHz (HS)
+#define _XTAL_FREQ        24000000UL //Crystal frequency fosc = 24MHz (HS) - given for the demo board
 #define TICKS_PER_SECOND  100        //Timer 2 gives one "tick" every 10ms
 
 //---------------- State numbers ----------------

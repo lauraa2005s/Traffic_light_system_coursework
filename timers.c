@@ -9,14 +9,18 @@
  *          so the main loop knows to run. All of the state timings are
  *          counted in these 10ms ticks.
  *
- *  Timer 2 calculation (4MHz crystal):
- *      Instruction clock = Fosc/4         = 1,000,000 Hz
- *      Prescale 1:4                       =   250,000 Hz
- *      PR2 = 249 (counts 0-249 = 250)     =     1,000 Hz
- *      Postscale 1:10                     =       100 Hz  -> 10ms per interrupt
+ *  Timer 2 calculation (fosc = 24MHz crystal):
+ *      Instruction clock = fosc/4         = 6,000,000 Hz
+ *      Prescale 1:16                      =   375,000 Hz
+ *      PR2 = 249 (counts 0-249 = 250)     =     1,500 Hz
+ *      Postscale 1:15                     =       100 Hz  -> 10ms per interrupt
  *
- *  If the board uses a 20MHz crystal instead, use prescale 1:16, PR2 = 249,
- *  postscale 1:10 (gives 125Hz = 8ms) and change TICKS_PER_SECOND to 125.
+ *  The prescale (/16) and postscale (/15) are the same as the Timer 2 lab code.
+ *  The lab used PR2 = 255 and reloaded TMR2 = 6 in the interrupt to get 250
+ *  counts. Here PR2 = 249 is used instead: Timer 2 resets itself to 0 when it
+ *  matches PR2, so EVERY period is exactly 250 counts and no reload is needed.
+ *  (With the lab method only the first of the 15 periods is 250 counts - the
+ *  other 14 count 0-255 = 256, so the tick would be about 10.2ms, not 10ms.)
 */
 
 //Included Files
@@ -33,8 +37,8 @@
 //The setup function.
 void setup_timer2(void){
     T2CONbits.TMR2ON = 0;        //Keep the timer stopped while setting it up
-    T2CONbits.T2CKPS = 0b01;     //Set timer 2 prescale to /4
-    T2CONbits.TOUTPS = 0b1001;   //Set timer 2 postscale to /10
+    T2CONbits.T2CKPS = 0b11;     //Set timer 2 prescale to /16
+    T2CONbits.TOUTPS = 0b1110;   //Set timer 2 postscale to /15
     TMR2 = 0;                    //Clear the count
     PR2 = 249;                   //Timer 2 resets to 0 when it matches PR2 (250 counts)
     //(Timer 2 interrupt is enabled in setup_interrupts(), timer is started in main())
