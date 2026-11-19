@@ -1,12 +1,12 @@
 /*
  * Filename: config.c
- * Author:
- * Date:
+ * Author: Laura Salomon
+ * Date: 19/11/26
  * Revision Number: 1
  * Target Device: PIC18F452
  * Compiler: XC8
  * Summary: Configuration bit settings for the traffic light controller.
- *          These only need to appear in ONE file of the project.
+ *         
 */
 
 //Configuration statements
@@ -55,7 +55,3 @@
 
 //Included Files
 #include <xc.h>
-
-/* Connection information
- * None - this file only holds the configuration bits.
-*/
