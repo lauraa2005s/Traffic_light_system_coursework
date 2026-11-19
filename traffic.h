@@ -51,14 +51,14 @@
 
 //---------------- Time spent in each state (in ticks) ----------------
 //Change the number of seconds here to alter the timing of each phase
-#define T_S1  (10 * TICKS_PER_SECOND)  //Main green minimum time
+#define T_S1  (180 * TICKS_PER_SECOND)  //Main green minimum time
 #define T_S2  (3  * TICKS_PER_SECOND)  //Main amber
-#define T_S3  (2  * TICKS_PER_SECOND)  //All red clearance
-#define T_S4  (2  * TICKS_PER_SECOND)  //Side red + amber
-#define T_S5  (8  * TICKS_PER_SECOND)  //Side green
+#define T_S3  (3  * TICKS_PER_SECOND)  //All red clearance
+#define T_S4  (25  * TICKS_PER_SECOND / 10)  //Side red + amber
+#define T_S5  (60  * TICKS_PER_SECOND)  //Side green
 #define T_S6  (3  * TICKS_PER_SECOND)  //Side amber
-#define T_S7  (8  * TICKS_PER_SECOND)  //Pedestrian green
-#define T_S8  (2  * TICKS_PER_SECOND)  //Main red + amber
+#define T_S7  (15  * TICKS_PER_SECOND)  //Pedestrian green
+#define T_S8  (25  * TICKS_PER_SECOND / 10)  //Main red + amber
 
 //---------------- Sensor (ADC) settings ----------------
 //ADC is left justified, so ADRESH is 0-255 for 0V-5V (about 19.6mV per step)
