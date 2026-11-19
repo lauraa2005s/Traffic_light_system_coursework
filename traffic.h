@@ -116,7 +116,6 @@ extern unsigned int  state_timer;                     //Ticks left in present st
 void setup_ports(void);
 //adc.c
 void setup_adc(void);
-void adc_start_conversion(void);
 void adc_isr(void);
 //timers.c
 void setup_timer2(void);

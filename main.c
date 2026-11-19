@@ -56,6 +56,7 @@ void main(void){
 
 //Local default set-up parameters
     T2CONbits.TMR2ON = 1;        //Start Timer 2 - the 10ms ticks begin here
+    ADCON0bits.GO = 1;           //Start the first ADC conversion - the ADC interrupt restarts it after that
 
 //The actual code
 /* Every time Timer 2 sets tick_flag (every 10ms) the main loop:
@@ -63,7 +64,8 @@ void main(void){
  *   2. run_state_machine() - counts down the state time, then decides the next state
  *   3. update_outputs()    - decodes the state number into the lights
  * Between ticks the processor just waits; the interrupts keep the ADC and
- * pedestrian button up to date in the background.
+ * pedestrian button up to date in the background (the ADC restarts itself
+ * from its interrupt, as in the ADC lab).
 */
     while(1){
         if(tick_flag){
@@ -79,7 +81,7 @@ void main(void){
 void setup(void){
     setup_ports();               //Pin directions, analogue pins, pull-ups (hardware.c)
     all_red();                   //Make sure every light is red straight away (outputs.c)
-    setup_adc();                 //ADC on AN0 (adc.c)
+    setup_adc();                 //ADC on AN0, Port A inputs, ADC interrupt enabled (adc.c)
     setup_timer2();              //10ms tick (timers.c)
     init_state_machine();        //Start in S3 - all red (state_machine.c)
     setup_interrupts();          //Enable INT0, Timer 2 and ADC interrupts - last (interrupts.c)

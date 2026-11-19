@@ -5,9 +5,9 @@
  * Revision Number: 1
  * Target Device: PIC18F452
  * Compiler: XC8
- * Summary: Sets the direction (input/output) of every port pin, selects which
- *          Port A / Port E pins are analogue or digital and turns on the
- *          internal pull-up needed by the pedestrian button on RB0.
+ * Summary: Sets the direction (input/output) of the Port B, D and E pins and
+ *          turns on the internal pull-up needed by the pedestrian button on RB0.
+ *          (Port A and the analogue/digital selection are done in adc.c.)
 */
 
 //Included Files
@@ -21,7 +21,6 @@
 */
 
 //Definitions
-#define PORTA_CFG  TRISA
 #define PORTB_CFG  TRISB
 #define PORTD_CFG  TRISD
 #define PORTE_CFG  TRISE
@@ -31,8 +30,8 @@
 //The setup function.
 void setup_ports(void){
     //Port A - traffic sensors
-    PORTA_CFG = 0b00111111;      //RA0-RA5 all inputs (RA0-RA3 used for the sensors)
-    ADCON1bits.PCFG = 0b0010;    //AN0-AN4 analogue, AN5-AN7 (RE0-RE2) digital, Vref = VDD/VSS
+    //(Port A direction and the analogue/digital pin selection (PCFG) are set
+    // in setup_adc() in adc.c, following the ADC lab code)
 
     //Port B - crossing button and wait / crossing lights
     PORTB_CFG = 0b00000011;      //RB0 input (button), RB1 unused input, RB2-RB7 outputs

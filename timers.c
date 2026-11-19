@@ -6,8 +6,8 @@
  * Target Device: PIC18F452
  * Compiler: XC8
  * Summary: Timer 2 produces a regular 10ms "tick". Every tick it sets tick_flag
- *          (so the main loop knows to run) and starts the next ADC conversion.
- *          All of the state timings are counted in these 10ms ticks.
+ *          so the main loop knows to run. All of the state timings are
+ *          counted in these 10ms ticks.
  *
  *  Timer 2 calculation (4MHz crystal):
  *      Instruction clock = Fosc/4         = 1,000,000 Hz
@@ -46,5 +46,4 @@ void setup_timer2(void){
 void timer2_isr(void){
     //No need to reload TMR2 - it automatically goes back to 0 when it matches PR2
     tick_flag = 1;               //Tell the main loop that 10ms has passed
-    adc_start_conversion();      //Read the next traffic sensor
 }

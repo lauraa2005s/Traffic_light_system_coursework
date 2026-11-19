@@ -9,7 +9,7 @@
  *          Three interrupt sources are used:
  *            INT0 (RB0) - pedestrian button pressed  -> remember the request
  *            Timer 2    - 10ms tick                   -> timers.c
- *            ADC        - conversion finished         -> adc.c
+ *            ADC        - conversion finished         -> adc.c, then restart conversion
  *          The ISR only does short jobs; all the decisions are made in the
  *          main loop.
 */
@@ -40,10 +40,11 @@ void __interrupt() HighInt(void){
         timer2_isr();
     }
 
-    //ADC - conversion complete
+    //ADC - conversion complete (same pattern as the ADC lab code)
     if(PIE1bits.ADIE && PIR1bits.ADIF){
-        PIR1bits.ADIF = 0;       //Reset the ADC interrupt flag
-        adc_isr();
+        PIR1bits.ADIF = 0;       //reset ADC interrupt flag
+        adc_isr();               //save the result and select the next sensor (adc.c)
+        ADCON0bits.GO = 1;       //restart conversion
     }
 
     return;
@@ -62,10 +63,11 @@ void setup_interrupts(void){
     PIR1bits.TMR2IF = 0;         //Clear any old flag
     PIE1bits.TMR2IE = 1;         //Timer 2 interrupt enable
 
-    //ADC
-    PIR1bits.ADIF = 0;           //Clear any old flag
-    PIE1bits.ADIE = 1;           //Enable ADC interrupt
+    //ADC interrupt enable (PIE1bits.ADIE) is set in setup_adc() in adc.c, as in the ADC lab
 
+    //The ADC lab used INTCON = 0b11000000 to set GIE and PEIE in one go.
+    //That would also clear INT0IE (bit 4) and switch off the crossing button,
+    //so here the two bits are set on their own instead.
     INTCONbits.PEIE = 1;         //Peripheral interrupts enabled (needed for Timer 2 and ADC)
     INTCONbits.GIE = 1;          //Global interrupts enabled - always do this last
 }
