@@ -29,7 +29,11 @@ volatile unsigned char ped_request = 0;               //1 = a crossing button ha
 //---- Written by the main loop only ----
 unsigned char sensor_present[NUM_SENSORS] = {0};      //1 = vehicle detected on that sensor
 unsigned char main_traffic = 0;                       //Input M: vehicle on either main road sensor
-unsigned char side_request = 0;                       //Input S: vehicle has been seen on the side road (latched)
+unsigned char side_request = 0;                       //REQUEST flag: vehicle has been seen on the side road (latched)
+unsigned char side_served = 0;                        //SERVED flag: side road has had its green this cycle
+unsigned char ped_served = 0;                         //SERVED flag: pedestrians have had their green this cycle
+unsigned char side_input = 0;                         //Input S: side_request AND NOT side_served
+unsigned char ped_input = 0;                          //Input P: ped_request AND NOT ped_served
 unsigned char sm_inputs = 0;                          //Inputs packed as binary M S P (e.g. 0b011)
 unsigned char current_state = S3;                     //Present state of the state machine
 unsigned int  state_timer = 0;                        //Number of ticks left in the present state

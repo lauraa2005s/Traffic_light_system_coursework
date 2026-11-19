@@ -9,8 +9,12 @@
  *          case matches one state (circle) on the state transition diagram.
  *
  *  Inputs are written in the same order as on the diagram:  M , S , P
- *      M = main road traffic, S = side road request, P = pedestrian request
+ *      M = main road traffic
+ *      S = side road waiting and not yet served this cycle   (side_input)
+ *      P = pedestrians waiting and not yet served this cycle (ped_input)
  *      X = don't care
+ *  (S and P are built from the request/served flags in sensors.c, so the
+ *   side road and pedestrians each get at most one turn per main road green.)
  *
  *  Each state is held for a set time (T_S1 ... T_S8 in traffic.h).
  *  Only when that time is up are the transition conditions checked.
@@ -81,8 +85,8 @@ void run_state_machine(void){
 
     //Take a copy of the inputs so they cannot change half way through
     M = main_traffic;
-    S = side_request;
-    P = ped_request;
+    S = side_input;
+    P = ped_input;
 
     switch(current_state){
 

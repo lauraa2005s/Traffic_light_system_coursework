@@ -102,7 +102,11 @@ extern volatile unsigned char ped_request;            //1 = pedestrian button ha
 
 extern unsigned char sensor_present[NUM_SENSORS];     //1 = vehicle on that sensor (after hysteresis)
 extern unsigned char main_traffic;                    //State machine input 1 (M)
-extern unsigned char side_request;                    //State machine input 2 (S) - latched
+extern unsigned char side_request;                    //REQUEST flag - side road vehicle seen (latched)
+extern unsigned char side_served;                     //SERVED flag - side road had its green this cycle
+extern unsigned char ped_served;                      //SERVED flag - pedestrians had their green this cycle
+extern unsigned char side_input;                      //State machine input 2 (S)
+extern unsigned char ped_input;                       //State machine input 3 (P)
 extern unsigned char sm_inputs;                       //M,S,P packed as 3 bits for the watch window
 extern unsigned char current_state;                   //Present state S1-S8
 extern unsigned int  state_timer;                     //Ticks left in present state
