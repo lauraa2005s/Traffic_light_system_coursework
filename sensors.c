@@ -8,7 +8,9 @@
  * Summary: Signal conditioning. Turns the four analogue sensor readings and
  *          the crossing button into the three digital inputs used by the
  *          state machine:
- *            M = main_traffic - a vehicle is on either main road sensor (live)
+ *            M = main_input   - a vehicle is on either main road sensor (live)
+ *                               AND the 3 minute main green maximum has not
+ *                               been reached
  *            S = side_input   - side road is waiting AND has not been served yet
  *            P = ped_input    - pedestrians are waiting AND have not been served yet
  *
@@ -94,11 +96,15 @@ void process_sensors(void){
         ped_served  = 0;
     }
 
-    //6. Inputs to the state machine: waiting AND not already served this cycle
-    side_input = (side_request && !side_served) ? 1 : 0;   //S
-    ped_input  = (ped_request  && !ped_served)  ? 1 : 0;   //P
+    //6. Inputs to the state machine
+    //   M: main traffic only holds the green until the 3 minute maximum is reached
+    //      (max_green_reached is set by the state machine, reset each time S1 starts)
+    //   S, P: waiting AND not already served this cycle
+    main_input = (main_traffic && !max_green_reached) ? 1 : 0;   //M
+    side_input = (side_request && !side_served) ? 1 : 0;         //S
+    ped_input  = (ped_request  && !ped_served)  ? 1 : 0;         //P
 
     //7. Pack the inputs as M,S,P (same order as the state transition diagram)
     //   so they can be watched in the MPLAB X watch window while testing
-    sm_inputs = (unsigned char)((main_traffic << 2) | (side_input << 1) | ped_input);
+    sm_inputs = (unsigned char)((main_input << 2) | (side_input << 1) | ped_input);
 }
