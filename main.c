@@ -30,7 +30,7 @@
 //(These are all in config.c)
 
 //Included Files
-#include "traffic.h"
+#include "trafficlightsystem.h"
 
 /* Connection information
  * See traffic.h for the full pin list.
