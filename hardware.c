@@ -11,7 +11,7 @@
 */
 
 //Included Files
-#include "traffic.h"
+#include "trafficlightsystem.h"
 
 /* Connection information
  * Port A: RA0-RA3 analogue inputs (traffic sensors), RA4-RA5 unused (inputs)
