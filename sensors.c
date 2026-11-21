@@ -40,7 +40,7 @@
 */
 
 //Included Files
-#include "traffic.h"
+#include "trafficlightsystem.h"
 
 /* Connection information
  * Uses adc_result[] filled in by adc.c (AN0-AN3 = RA0-RA3)
