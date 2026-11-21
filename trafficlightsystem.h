@@ -11,8 +11,8 @@
  *          Add this file under "Header Files" in the MPLAB X project.
 */
 
-#ifndef TRAFFIC_H
-#define TRAFFIC_H
+#ifndef TRAFFICLIGHTSYSTEM_H
+#define TRAFFICLIGHTSYSTEM_H
 
 //Included Files
 #include <xc.h>
