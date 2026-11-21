@@ -23,7 +23,7 @@
 */
 
 //Included Files
-#include "traffic.h"
+#include "trafficlightsystem.h"
 
 /* Connection information
  * Main road  R/A/G = RD7/RD6/RD5
