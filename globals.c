@@ -12,7 +12,7 @@
 */
 
 //Included Files
-#include "traffic.h"
+#include "trafficlightsystem.h"
 
 /* Connection information
  * None.
