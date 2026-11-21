@@ -15,7 +15,7 @@
 */
 
 //Included Files
-#include "traffic.h"
+#include "trafficlightsystem.h"
 
 /* Connection information
  * RB0 / INT0 - crossing buttons (all four in parallel), active low
