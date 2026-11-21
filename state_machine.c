@@ -16,7 +16,7 @@
  *  (M, S and P are built in sensors.c. The served flags mean the side road
  *   and pedestrians each get at most one turn per main road green.)
  *
- *  Each state is held for a set time (T_S1 ... T_S8 in traffic.h).
+ *  Each state is held for a set time (T_S1 ... T_S8 in trafficlightsystem.h).
  *  Only when that time is up are the transition conditions checked.
  *
  *  S1 (main green) timing:

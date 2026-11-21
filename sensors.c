@@ -43,7 +43,7 @@
 #include "trafficlightsystem.h"
 
 /* Connection information
- * Uses adc_result[] filled in by adc.c (AN0-AN3 = RA0-RA3)
+ * Uses road_sensors[] filled in by the ADC interrupt (AN0-AN3 = RA0-RA3)
 */
 
 //Definitions
@@ -60,7 +60,7 @@ void process_sensors(void){
 
     //1. Convert each analogue reading into vehicle / no vehicle (with hysteresis)
     for(i = 0; i < NUM_SENSORS; i++){
-        reading = adc_result[i];                 //Take a copy (it is changed by the ADC interrupt)
+        reading = road_sensors[i];                 //Take a copy (it is changed by the ADC interrupt)
         if(reading >= VEHICLE_ON_LEVEL){
             sensor_present[i] = 1;               //More than 1.4V - vehicle present
         }

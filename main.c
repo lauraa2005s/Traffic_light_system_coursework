@@ -16,14 +16,14 @@
  *      config.c        configuration bits
  *      globals.c       global variables
  *      hardware.c      port directions, analogue/digital pins, pull-ups
- *      adc.c           reading the four traffic sensors
+ *      adc.c           ADC + Timer 1 set-up for the four traffic sensors
  *      timers.c        Timer 2 10ms tick
  *      interrupts.c    interrupt service routine + interrupt set-up
  *      sensors.c       signal conditioning (thresholds, hysteresis, latching)
  *      state_machine.c the finite state machine (switch-case)
  *      outputs.c       output decoding (state table) + safety check
  *      main.c          this file
- *      traffic.h       shared definitions and prototypes
+ *      trafficlightsystem.h  shared definitions and prototypes
 */
 
 //Configuration statements
@@ -33,7 +33,7 @@
 #include "trafficlightsystem.h"
 
 /* Connection information
- * See traffic.h for the full pin list.
+ * See trafficlightsystem.h for the full pin list.
 */
 
 //Definitions
@@ -56,7 +56,7 @@ void main(void){
 
 //Local default set-up parameters
     T2CONbits.TMR2ON = 1;        //Start Timer 2 - the 10ms ticks begin here
-    ADCON0bits.GO = 1;           //Start the first ADC conversion - the ADC interrupt restarts it after that
+    T1CONbits.TMR1ON = 1;        //Start Timer 1 - the ADC readings begin here
 
 //The actual code
 /* Every time Timer 2 sets tick_flag (every 10ms) the main loop:
@@ -64,8 +64,8 @@ void main(void){
  *   2. run_state_machine() - counts down the state time, then decides the next state
  *   3. update_outputs()    - decodes the state number into the lights
  * Between ticks the processor just waits; the interrupts keep the ADC and
- * pedestrian button up to date in the background (the ADC restarts itself
- * from its interrupt, as in the ADC lab).
+ * pedestrian button up to date in the background (Timer 1 starts a new ADC
+ * conversion every 10.92ms).
 */
     while(1){
         if(tick_flag){
@@ -81,10 +81,10 @@ void main(void){
 void setup(void){
     setup_ports();               //Pin directions, analogue pins, pull-ups (hardware.c)
     all_red();                   //Make sure every light is red straight away (outputs.c)
-    setup_adc();                 //ADC on AN0, Port A inputs, ADC interrupt enabled (adc.c)
+    setup_adc();                 //Port A inputs, ADC on AN0, Timer 1, ADC + Timer 1 interrupts enabled (adc.c)
     setup_timer2();              //10ms tick (timers.c)
     init_state_machine();        //Start in S3 - all red (state_machine.c)
-    setup_interrupts();          //Enable INT0, Timer 2 and ADC interrupts - last (interrupts.c)
+    setup_interrupts();          //Enable INT0 and Timer 2 interrupts, then PEIE and GIE - last (interrupts.c)
 }
 
 // Any other functions used

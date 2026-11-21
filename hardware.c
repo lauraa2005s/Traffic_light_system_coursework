@@ -14,7 +14,7 @@
 #include "trafficlightsystem.h"
 
 /* Connection information
- * Port A: RA0-RA3 analogue inputs (traffic sensors), RA4-RA5 unused (inputs)
+ * Port A: RA0-RA3 analogue inputs (traffic sensors), RA4-RA5 unused - set in adc.c
  * Port B: RB0 input (crossing buttons), RB1 unused, RB2-RB7 outputs
  * Port D: RD0-RD7 all outputs (lights)
  * Port E: RE0-RE1 outputs (pedestrian green/red), RE2 unused

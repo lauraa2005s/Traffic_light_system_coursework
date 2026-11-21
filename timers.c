@@ -8,6 +8,8 @@
  * Summary: Timer 2 produces a regular 10ms "tick". Every tick it sets tick_flag
  *          so the main loop knows to run. All of the state timings are
  *          counted in these 10ms ticks.
+ *          (Timer 1 is also used - it paces the ADC readings and is set up
+ *           in setup_adc() in adc.c.)
  *
  *  Timer 2 calculation (fosc = 24MHz crystal):
  *      Instruction clock = fosc/4         = 6,000,000 Hz

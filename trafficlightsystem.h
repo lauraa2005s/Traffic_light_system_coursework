@@ -1,5 +1,5 @@
 /*
- * Filename: traffic.h
+ * Filename: trafficlightsystem.h
  * Author:
  * Date:
  * Revision Number: 1
@@ -97,8 +97,8 @@
 
 //Global Variables (defined in globals.c, "extern" lets other files use them)
 extern volatile unsigned char tick_flag;              //Set by Timer 2 every 10ms
-extern volatile unsigned char adc_result[NUM_SENSORS];//Latest 8 bit ADC reading per sensor
-extern volatile unsigned char adc_channel;            //Channel currently being converted
+extern volatile unsigned char road_sensors[NUM_SENSORS]; //Latest 8 bit ADC reading per sensor
+extern volatile unsigned char current_channel;           //Channel currently being converted
 extern volatile unsigned char ped_request;            //1 = pedestrian button has been pressed
 
 extern unsigned char sensor_present[NUM_SENSORS];     //1 = vehicle on that sensor (after hysteresis)
@@ -120,7 +120,6 @@ extern unsigned int  state_timer;                     //Ticks left in present st
 void setup_ports(void);
 //adc.c
 void setup_adc(void);
-void adc_isr(void);
 //timers.c
 void setup_timer2(void);
 void timer2_isr(void);
