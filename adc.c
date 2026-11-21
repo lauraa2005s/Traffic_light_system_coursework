@@ -34,7 +34,7 @@
 */
 
 //Included Files
-#include "traffic.h"
+#include "trafficlightsystem.h"
 
 /* Connection information
  * ADC Inputs are from Port A bits 0-3
