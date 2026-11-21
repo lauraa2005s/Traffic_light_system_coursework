@@ -24,7 +24,7 @@
 */
 
 //Included Files
-#include "traffic.h"
+#include "trafficlightsystem.h"
 
 /* Connection information
  * None - Timer 2 is internal.
