@@ -45,7 +45,7 @@
 */
 
 //Included Files
-#include "traffic.h"
+#include "trafficlightsystem.h"
 
 /* Connection information
  * None - inputs come from sensors.c, outputs are decoded in outputs.c
